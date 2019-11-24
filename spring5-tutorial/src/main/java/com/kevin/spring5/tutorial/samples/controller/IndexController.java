@@ -1,6 +1,8 @@
 package com.kevin.spring5.tutorial.samples.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.server.ServerHttpRequest;
+import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -16,7 +18,7 @@ public class IndexController {
 
 
 	@GetMapping("/")
-	public Mono<String> index() {
+	public Mono<String> index(ServerHttpRequest request, ServerHttpResponse response) {
 		return Mono.just("hello,spring webflux...");
 	}
 

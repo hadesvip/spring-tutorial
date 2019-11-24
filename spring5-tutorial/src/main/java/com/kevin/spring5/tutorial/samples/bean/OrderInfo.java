@@ -1,6 +1,8 @@
 package com.kevin.spring5.tutorial.samples.bean;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +13,8 @@ import java.util.Date;
  * @date: 2019/11/22 23:56
  */
 @Data
+@AllArgsConstructor
+@ToString
 public class OrderInfo implements Serializable {
 
 	private String orderNo;
@@ -21,10 +25,4 @@ public class OrderInfo implements Serializable {
 
 	private Date createDatetime;
 
-	public OrderInfo(String orderNo, String type, String amount, Date createDatetime) {
-		this.orderNo = orderNo;
-		this.type = type;
-		this.amount = amount;
-		this.createDatetime = createDatetime;
-	}
 }

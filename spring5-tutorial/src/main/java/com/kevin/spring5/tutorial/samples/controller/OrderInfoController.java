@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.BodyExtractor;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
@@ -34,8 +35,10 @@ public class OrderInfoController {
 	}
 
 	@GetMapping("/getOrderInfo/{orderNo}")
-	public Mono<OrderInfo> getOrderInfo(@PathVariable("orderNo") String orderNo) {
+	public Mono<OrderInfo> getOrderInfo(@PathVariable("orderNo") String orderNo, ServerRequest request) {
 		log.info("获取订单信息,订单号:{}", orderNo);
+
+		Mono<String> stringMono = request.bodyToMono(String.class);
 		return orderInfoSerivce.getOrderInfo(orderNo);
 
 	}
