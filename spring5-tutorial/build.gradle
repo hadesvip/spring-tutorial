@@ -1,0 +1,78 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+    }
+}
+
+apply plugin: "java"
+apply plugin: "war"
+apply plugin: "io.spring.dependency-management"
+
+
+group "com.kevin"
+version "1.0-SNAPSHOT"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+ext {
+    spring_version = "5.2.1.RELEASE"
+    servlet_version = "4.0.1"
+    lombok_version = "1.18.10"
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "io.projectreactor:reactor-bom:Dysprosium-SR1"
+    }
+}
+
+
+dependencies {
+
+    compile("org.springframework:spring-beans:${spring_version}",
+            "org.springframework:spring-core:${spring_version}",
+            "org.springframework:spring-context:${spring_version}",
+            "org.springframework:spring-context-support:${spring_version}",
+            "org.springframework:spring-expression:${spring_version}",
+            "org.springframework:spring-aspects:${spring_version}",
+            "org.springframework:spring-web:${spring_version}",
+            "org.springframework:spring-webflux:${spring_version}",
+            "org.springframework:spring-oxm:${spring_version}",
+            "ch.qos.logback:logback-classic:1.2.3",
+            "org.apache.logging.log4j:log4j-to-slf4j:2.12.1",
+            "org.slf4j:jul-to-slf4j:1.7.29",
+            'com.fasterxml.jackson.core:jackson-databind:2.10.1',
+            'com.fasterxml.jackson.core:jackson-core:2.10.1',
+            'com.fasterxml.jackson.core:jackson-annotations:2.10.1',
+            'org.freemarker:freemarker:2.3.29'
+
+    )
+
+
+    compileOnly "javax.servlet:javax.servlet-api:${servlet_version}"
+    compileOnly "org.projectlombok:lombok:${lombok_version}"
+    annotationProcessor "org.projectlombok:lombok:${lombok_version}"
+    testCompile group: "junit", name: "junit", version: "4.12"
+    testCompile "io.projectreactor:reactor-test"
+
+
+}
+
+
+//    compile "org.reactivestreams:reactive-streams"
+//    compile "io.projectreactor:reactor-core"
+//    compile "io.projectreactor.ipc:reactor-netty"
