@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'war'
+    id 'idea'
+    id 'maven'
 }
 
 group 'com.kevin'

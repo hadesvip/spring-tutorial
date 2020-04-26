@@ -1,3 +1,4 @@
 rootProject.name = 'spring-tutorial'
 include 'spring5-tutorial'
+include 'spring-lecture'
 
